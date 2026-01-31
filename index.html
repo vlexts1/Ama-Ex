@@ -2,99 +2,214 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
 <title>AMA — Auto Moto Auction</title>
 
 <style>
-:root{
-  --red:#b00014; --red2:#ff1e2d; --bg:#020203; --text:#eaeaea; --muted:#9a9a9a;
+/* ===== FONT ===== */
+@font-face {
+    font-family: "Soyuz Grotesk";
+    src:
+        url("SoyuzGroteskBold.otf") format("opentype"),
+        url("SoyuzGroteskBold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
 }
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
-body{background:#000;color:var(--text);line-height:1.6;overflow-x:hidden}
 
-/* ===== HERO with VIDEO ===== */
+/* ===== VARIABLES ===== */
+:root{
+    --red:#b00014;
+    --red2:#ff1e2d;
+    --black:#020203;
+    --dark:#0b0b10;
+    --text:#f2f2f2;
+    --muted:#9a9a9a;
+}
+
+/* ===== RESET ===== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Soyuz Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    background:var(--black);
+    color:var(--text);
+    line-height:1.6;
+    overflow-x:hidden;
+}
+
+/* ===== HERO ===== */
 .hero{
-  position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
-  text-align:center;overflow:hidden
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:0 8%;
+    background:
+        linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.9)),
+        url("hero-bg.jpg") center/cover no-repeat;
 }
-.hero video{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.35) saturate(1.1)
-}
+
 .hero::after{
-  content:"";position:absolute;inset:0;
-  background:
-    radial-gradient(circle at 20% 10%, rgba(255,0,0,.25), transparent 40%),
-    radial-gradient(circle at 80% 30%, rgba(255,0,0,.15), transparent 45%),
-    linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.7));
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(circle at 20% 15%, rgba(255,0,0,.25), transparent 45%),
+        radial-gradient(circle at 80% 30%, rgba(255,0,0,.15), transparent 45%);
 }
-.hero .inner{position:relative;z-index:2;padding:0 8%}
+
+.hero .inner{
+    position:relative;
+    z-index:2;
+}
+
 .hero h1{
-  font-size:96px;letter-spacing:12px;font-weight:900;
-  text-shadow:0 0 25px rgba(255,0,0,.45),0 0 70px rgba(255,0,0,.35)
+    font-size:clamp(64px, 14vw, 130px);
+    letter-spacing:14px;
+    text-transform:uppercase;
+    text-shadow:
+        0 0 30px rgba(255,0,0,.45),
+        0 0 80px rgba(255,0,0,.35);
 }
-.hero p{margin-top:18px;color:var(--muted);font-size:18px}
+
+.hero p{
+    margin-top:20px;
+    font-size:18px;
+    color:var(--muted);
+}
+
+/* ===== BUTTON ===== */
 .btn{
-  margin-top:40px;display:inline-block;padding:18px 44px;
-  background:linear-gradient(135deg,var(--red),var(--red2));
-  color:#fff;text-decoration:none;font-weight:800;border-radius:10px;
-  box-shadow:0 16px 45px rgba(255,0,0,.45);
-  transition:.25s
+    margin-top:42px;
+    display:inline-block;
+    padding:18px 52px;
+    background:linear-gradient(135deg,var(--red),var(--red2));
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    border-radius:14px;
+    box-shadow:0 20px 60px rgba(255,0,0,.45);
+    transition:.25s;
 }
-.btn:hover{transform:translateY(-3px);box-shadow:0 26px 70px rgba(255,0,0,.7)}
+
+.btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 30px 90px rgba(255,0,0,.75);
+}
 
 /* ===== SECTIONS ===== */
-section{padding:110px 8%}
-h2{font-size:42px;margin-bottom:50px}
+section{
+    padding:100px 8%;
+}
 
-/* ===== GRID / CARDS ===== */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px}
+h2{
+    font-size:clamp(28px, 6vw, 44px);
+    margin-bottom:50px;
+}
+
+/* ===== GRID ===== */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:34px;
+}
+
 .card{
-  background:linear-gradient(180deg,#0f0f16,#07070b);
-  border:1px solid rgba(255,0,0,.18);
-  padding:42px;border-radius:18px;position:relative;
-  opacity:0;transform:translateY(40px);
-  transition:transform .4s ease,opacity .4s ease,box-shadow .4s ease
+    background:linear-gradient(180deg,#0f0f16,#07070b);
+    border:1px solid rgba(255,0,0,.2);
+    padding:40px;
+    border-radius:20px;
+    transition:.35s;
 }
-.card::before{
-  content:"";position:absolute;inset:0;border-radius:18px;
-  background:linear-gradient(120deg,transparent,rgba(255,0,0,.18),transparent);
-  opacity:0;transition:.3s
+
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 35px 90px rgba(0,0,0,.75);
 }
-.card.show{opacity:1;transform:none}
-.card:hover{box-shadow:0 34px 80px rgba(0,0,0,.7)}
-.card:hover::before{opacity:1}
-.card h3{font-size:22px;margin-bottom:14px}
-.card p{color:var(--muted)}
+
+.card p{color:var(--muted);}
 
 /* ===== FORM ===== */
 .form-box{
-  max-width:520px;margin:0 auto;
-  background:linear-gradient(180deg,#0f0f16,#07070b);
-  padding:44px;border-radius:18px;border:1px solid rgba(255,0,0,.25)
+    max-width:520px;
+    margin:0 auto;
+    background:linear-gradient(180deg,#0f0f16,#07070b);
+    padding:42px;
+    border-radius:22px;
+    border:1px solid rgba(255,0,0,.25);
 }
+
 form input,form textarea{
-  width:100%;padding:16px;margin-bottom:18px;
-  background:#020203;border:1px solid #2a2a32;color:#fff;border-radius:8px
+    width:100%;
+    padding:16px;
+    margin-bottom:18px;
+    background:#020203;
+    border:1px solid #2a2a32;
+    color:#fff;
+    border-radius:10px;
+    font-size:15px;
 }
+
+form textarea{resize:none;height:100px;}
+
 form button{
-  width:100%;padding:18px;
-  background:linear-gradient(135deg,var(--red),var(--red2));
-  border:none;color:#fff;font-size:16px;font-weight:800;border-radius:10px;cursor:pointer
+    width:100%;
+    padding:18px;
+    background:linear-gradient(135deg,var(--red),var(--red2));
+    border:none;
+    color:#fff;
+    font-size:16px;
+    font-weight:700;
+    border-radius:14px;
+    cursor:pointer;
 }
 
 /* ===== CONTACTS ===== */
-.contacts a{color:var(--red2);text-decoration:none}
+.contacts a{
+    color:var(--red2);
+    text-decoration:none;
+}
 
 /* ===== FLOAT TG ===== */
 .tg-float{
-  position:fixed;right:22px;bottom:22px;width:64px;height:64px;
-  background:#0088cc;color:#fff;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:28px;box-shadow:0 0 40px rgba(0,136,204,.7);z-index:9999
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    width:64px;
+    height:64px;
+    background:#0088cc;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    box-shadow:0 0 45px rgba(0,136,204,.8);
+    z-index:9999;
 }
 
 /* ===== FOOTER ===== */
-footer{text-align:center;padding:34px;color:#666}
+footer{
+    text-align:center;
+    padding:32px;
+    color:#666;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width:768px){
+    section{padding:70px 6%;}
+    .hero p{font-size:16px;}
+    .btn{padding:16px 40px;}
+    .card{padding:32px;}
+}
 </style>
 </head>
 
@@ -102,80 +217,76 @@ footer{text-align:center;padding:34px;color:#666}
 
 <!-- HERO -->
 <div class="hero">
-  <video src="bg.mp4" autoplay muted loop playsinline></video>
-  <div class="inner">
-    <h1>AMA</h1>
-    <p>Подбор, выкуп и доставка автомобилей под ключ<br>Южная Корея · Япония · Китай</p>
-    <a href="#form" class="btn">Оставить заявку</a>
-  </div>
+    <div class="inner">
+        <h1>AMA</h1>
+        <p>
+            Подбор, выкуп и доставка автомобилей под ключ<br>
+            Южная Корея · Япония · Китай
+        </p>
+        <a href="#form" class="btn">Оставить заявку</a>
+    </div>
 </div>
 
 <!-- SERVICES -->
 <section>
-  <h2>Чем мы занимаемся</h2>
-  <div class="grid">
-    <div class="card reveal">
-      <h3>Аукционы и рынок</h3>
-      <p>Прямой доступ к аукционам и дилерам</p>
+    <h2>Чем мы занимаемся</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>Аукционы и рынок</h3>
+            <p>Прямой доступ к аукционам и дилерам</p>
+        </div>
+        <div class="card">
+            <h3>Проверка</h3>
+            <p>Фото, видео, диагностика, история</p>
+        </div>
+        <div class="card">
+            <h3>Доставка под ключ</h3>
+            <p>Логистика, таможня, РФ</p>
+        </div>
     </div>
-    <div class="card reveal">
-      <h3>Проверка</h3>
-      <p>Фото, видео, диагностика, история</p>
-    </div>
-    <div class="card reveal">
-      <h3>Доставка под ключ</h3>
-      <p>Логистика, таможня, РФ</p>
-    </div>
-  </div>
 </section>
 
 <!-- FORM -->
 <section id="form">
-  <h2>Заявка</h2>
-  <div class="form-box reveal">
-    <form id="tgForm">
-      <input type="text" name="name" placeholder="Ваше имя" required>
-      <input type="tel" name="phone" placeholder="Телефон / WhatsApp" required>
-      <textarea name="message" placeholder="Какой автомобиль интересует"></textarea>
-      <button type="submit">Отправить заявку</button>
-    </form>
-  </div>
+    <h2>Заявка</h2>
+    <div class="form-box">
+        <form id="tgForm">
+            <input type="text" name="name" placeholder="Ваше имя" required>
+            <input type="tel" name="phone" placeholder="Телефон / WhatsApp" required>
+            <textarea name="message" placeholder="Какой автомобиль интересует"></textarea>
+            <button type="submit">Отправить заявку</button>
+        </form>
+    </div>
 </section>
 
 <!-- CONTACTS -->
 <section class="contacts">
-  <h2>Контакты</h2>
-  <p><strong>Павел — Россия</strong><br><a href="tel:+79237452009">+7 923 745-20-09</a></p><br>
-  <p><strong>Александр — Корея</strong><br><a href="tel:+821058356253">+82 10 5835 6253</a></p><br>
-  <p><a href="https://t.me/auto_moto_auction" target="_blank">Telegram-канал</a></p><br>
-  <p><a href="https://vk.com/auto_moto_auction" target="_blank">VK-группа</a></p>
+    <h2>Контакты</h2>
+    <p><strong>Павел — Россия</strong><br><a href="tel:+79237452009">+7 923 745-20-09</a></p><br>
+    <p><strong>Александр — Корея</strong><br><a href="tel:+821058356253">+82 10 5835 6253</a></p><br>
+    <p><a href="https://t.me/auto_moto_auction" target="_blank">Telegram</a></p>
+    <p><a href="https://vk.com/auto_moto_auction" target="_blank">VK</a></p>
 </section>
 
-<footer>@vlexts1</footer>
+<footer>© AMA Auto Moto Auction</footer>
 
 <a href="https://t.me/auto_moto_auction" class="tg-float" target="_blank">✈</a>
 
 <script>
-// ===== TELEGRAM BOT =====
-document.getElementById("tgForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  const TOKEN="8215640889:AAHjYWXgWQLn5LIkVNlgDY3SvxT0n9cAxqI";
-  const CHAT_ID="301069436";
-  fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`,{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({
-      chat_id:CHAT_ID,
-      text:`Заявка AMA\nИмя: ${this.name.value}\nТелефон: ${this.phone.value}\nЗапрос: ${this.message.value}`
-    })
-  }).then(()=>{alert("Заявка отправлена");this.reset();});
+document.getElementById("tgForm").addEventListener("submit",function(e){
+    e.preventDefault();
+    fetch("https://api.telegram.org/bot8215640889:AAHjYWXgWQLn5LIkVNlgDY3SvxT0n9cAxqI/sendMessage",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+            chat_id:"301069436",
+            text:`Заявка AMA\nИмя: ${this.name.value}\nТелефон: ${this.phone.value}\nЗапрос: ${this.message.value}`
+        })
+    }).then(()=>{
+        alert("Заявка отправлена. Мы свяжемся с вами.");
+        this.reset();
+    });
 });
-
-// ===== REVEAL ANIMATION =====
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("show"); } });
-},{threshold:.15});
-document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 </script>
 
 </body>
