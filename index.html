@@ -6,15 +6,20 @@
 <title>AMA — Auto Moto Auction</title>
 
 <style>
-/* ===== FONT ===== */
-@font-face {
-    font-family: "Soyuz Grotesk";
-    src:
-        url("SoyuzGroteskBold.otf") format("opentype"),
-        url("SoyuzGroteskBold.ttf") format("truetype");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
+/* ===== FONTS ===== */
+@font-face{
+    font-family:"Bounded";
+    src:url("Bounded-Variable.ttf") format("truetype");
+    font-weight:100 900;
+    font-style:normal;
+    font-display:swap;
+}
+@font-face{
+    font-family:"Bounded Black";
+    src:url("Bounded-Black.ttf") format("truetype");
+    font-weight:900;
+    font-style:normal;
+    font-display:swap;
 }
 
 /* ===== VARIABLES ===== */
@@ -30,10 +35,9 @@
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
-    font-family:"Soyuz Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    font-family:"Bounded",system-ui,-apple-system,Segoe UI,Arial,sans-serif;
     background:var(--black);
     color:var(--text);
-    line-height:1.6;
     overflow-x:hidden;
 }
 
@@ -47,9 +51,10 @@ body{
     text-align:center;
     padding:0 8%;
     background:
-        linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.65)),
+        linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.65)),
         url("hero-bg.jpg") center/cover no-repeat;
-    filter:contrast(1.15) saturate(1.25) brightness(1.05);
+    filter:contrast(1.2) saturate(1.3) brightness(1.08);
+    will-change:background-position;
 }
 
 .hero::after{
@@ -66,47 +71,77 @@ body{
     z-index:2;
 }
 
-/* LOGO */
-.hero .logo{
-    max-width:260px;
-    margin:0 auto 20px;
+/* ===== AMA LETTER ANIMATION ===== */
+.brand-main{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin-bottom:14px;
 }
 
-.hero .logo img{
-    width:100%;
-}
-
-/* AUTO MOTO AUCTION TEXT */
-.hero .brand-text{
-    font-size:clamp(28px,6vw,44px);
-    letter-spacing:8px;
-    margin-bottom:18px;
-    text-transform:uppercase;
+.brand-main span{
+    font-family:"Bounded Black","Bounded",sans-serif;
+    font-size:clamp(96px, 22vw, 280px);
     color:#fff;
-    text-shadow:
-        0 0 20px rgba(255,0,0,.55),
-        0 0 50px rgba(255,0,0,.45);
+    opacity:0;
+    transform:translateY(40px) scale(.9);
+    animation:letterIn 1s ease forwards, glowPulse 4s ease-in-out infinite;
 }
 
+.brand-main span:nth-child(1){animation-delay:.1s}
+.brand-main span:nth-child(2){animation-delay:.25s}
+.brand-main span:nth-child(3){animation-delay:.4s}
+
+@keyframes letterIn{
+    to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+@keyframes glowPulse{
+    0%,100%{
+        text-shadow:
+            0 0 30px rgba(255,0,0,.6),
+            0 0 90px rgba(255,0,0,.45),
+            0 0 160px rgba(255,0,0,.25);
+    }
+    50%{
+        text-shadow:
+            0 0 45px rgba(255,0,0,.85),
+            0 0 120px rgba(255,0,0,.65),
+            0 0 220px rgba(255,0,0,.4);
+    }
+}
+
+/* ===== SECOND LOGO ===== */
+.hero-logo{
+    margin:16px auto 26px;
+    max-width:160px;
+    opacity:.9;
+}
+.hero-logo img{
+    width:100%;
+    filter:drop-shadow(0 0 25px rgba(255,0,0,.45));
+}
+
+/* ===== SUBTEXT ===== */
 .hero p{
     color:var(--muted);
     font-size:18px;
+    letter-spacing:1px;
 }
 
-/* BUTTON */
+/* ===== BUTTON ===== */
 .btn{
-    margin-top:42px;
+    margin-top:44px;
     display:inline-block;
-    padding:18px 52px;
+    padding:18px 56px;
     background:linear-gradient(135deg,var(--red),var(--red2));
     color:#fff;
     text-decoration:none;
-    font-weight:700;
+    font-weight:600;
     border-radius:14px;
     box-shadow:0 20px 60px rgba(255,0,0,.45);
     transition:.25s;
 }
-
 .btn:hover{
     transform:translateY(-3px);
     box-shadow:0 30px 90px rgba(255,0,0,.75);
@@ -116,6 +151,7 @@ body{
 section{padding:100px 8%}
 
 h2{
+    font-family:"Bounded Black","Bounded",sans-serif;
     font-size:clamp(28px,6vw,44px);
     margin-bottom:50px;
 }
@@ -126,7 +162,6 @@ h2{
     grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
     gap:34px;
 }
-
 .card{
     background:linear-gradient(180deg,#0f0f16,#07070b);
     border:1px solid rgba(255,0,0,.2);
@@ -134,12 +169,10 @@ h2{
     border-radius:20px;
     transition:.35s;
 }
-
 .card:hover{
     transform:translateY(-6px);
     box-shadow:0 35px 90px rgba(0,0,0,.75);
 }
-
 .card p{color:var(--muted)}
 
 /* ===== FORM ===== */
@@ -151,7 +184,6 @@ h2{
     border-radius:22px;
     border:1px solid rgba(255,0,0,.25);
 }
-
 form input,form textarea{
     width:100%;
     padding:16px;
@@ -160,11 +192,8 @@ form input,form textarea{
     border:1px solid #2a2a32;
     color:#fff;
     border-radius:10px;
-    font-size:15px;
 }
-
 form textarea{resize:none;height:100px}
-
 form button{
     width:100%;
     padding:18px;
@@ -172,18 +201,11 @@ form button{
     border:none;
     color:#fff;
     font-size:16px;
-    font-weight:700;
     border-radius:14px;
     cursor:pointer;
 }
 
-/* ===== CONTACTS ===== */
-.contacts a{
-    color:var(--red2);
-    text-decoration:none;
-}
-
-/* ===== FLOAT TG ===== */
+/* ===== TG FLOAT ===== */
 .tg-float{
     position:fixed;
     right:18px;
@@ -201,20 +223,15 @@ form button{
     z-index:9999;
 }
 
-/* ===== FOOTER ===== */
-footer{
-    text-align:center;
-    padding:32px;
-    color:#666;
-}
-
 /* ===== MOBILE ===== */
 @media (max-width:768px){
     section{padding:70px 6%}
-    .hero .logo{max-width:200px}
-    .hero .brand-text{letter-spacing:5px}
-    .hero p{font-size:16px}
-    .btn{padding:16px 40px}
+    .brand-main{gap:10px}
+    .brand-main span{
+        font-size:clamp(72px, 28vw, 160px);
+    }
+    .hero-logo{max-width:120px}
+    .hero p{font-size:15px}
 }
 </style>
 </head>
@@ -222,13 +239,16 @@ footer{
 <body>
 
 <!-- HERO -->
-<div class="hero">
+<div class="hero" id="hero">
     <div class="inner">
-        <div class="logo">
-            <img src="logo.png" alt="AMA Auto Moto Auction">
+
+        <div class="brand-main">
+            <span>A</span><span>M</span><span>A</span>
         </div>
 
-        <div class="brand-text">AUTO MOTO AUCTION</div>
+        <div class="hero-logo">
+            <img src="logo2.png" alt="AMA Auto Moto Auction">
+        </div>
 
         <p>
             Подбор, выкуп и доставка автомобилей под ключ<br>
@@ -271,20 +291,17 @@ footer{
     </div>
 </section>
 
-<!-- CONTACTS -->
-<section class="contacts">
-    <h2>Контакты</h2>
-    <p><strong>Павел — Россия</strong><br><a href="tel:+79237452009">+7 923 745-20-09</a></p><br>
-    <p><strong>Александр — Корея</strong><br><a href="tel:+821058356253">+82 10 5835 6253</a></p><br>
-    <p><a href="https://t.me/auto_moto_auction" target="_blank">Telegram</a></p>
-    <p><a href="https://vk.com/auto_moto_auction" target="_blank">VK</a></p>
-</section>
-
-<footer>© AMA Auto Moto Auction</footer>
-
 <a href="https://t.me/auto_moto_auction" class="tg-float" target="_blank">✈</a>
 
 <script>
+/* ===== PARALLAX ===== */
+const hero = document.getElementById("hero");
+window.addEventListener("scroll",()=>{
+    const y = window.scrollY * 0.3;
+    hero.style.backgroundPosition = `center calc(50% + ${y}px)`;
+});
+
+/* ===== TELEGRAM FORM ===== */
 document.getElementById("tgForm").addEventListener("submit",function(e){
     e.preventDefault();
     fetch("https://api.telegram.org/bot8215640889:AAHjYWXgWQLn5LIkVNlgDY3SvxT0n9cAxqI/sendMessage",{
@@ -303,3 +320,4 @@ document.getElementById("tgForm").addEventListener("submit",function(e){
 
 </body>
 </html>
+
