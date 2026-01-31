@@ -3,293 +3,180 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>AMA — Авто из Кореи, Японии и Китая</title>
-<meta name="description" content="AMA — премиальный подбор и доставка автомобилей из Южной Кореи, Японии и Китая под ключ">
+<title>AMA — Auto Moto Auction</title>
 
 <style>
-:root {
-    --bg: #0b0b0d;
-    --bg-dark: #050506;
-    --text: #eaeaea;
-    --muted: #9a9a9a;
-    --red: #c10018;
+:root{
+  --red:#b00014; --red2:#ff1e2d; --bg:#020203; --text:#eaeaea; --muted:#9a9a9a;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+body{background:#000;color:var(--text);line-height:1.6;overflow-x:hidden}
+
+/* ===== HERO with VIDEO ===== */
+.hero{
+  position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;overflow:hidden
+}
+.hero video{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.35) saturate(1.1)
+}
+.hero::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255,0,0,.25), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(255,0,0,.15), transparent 45%),
+    linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.7));
+}
+.hero .inner{position:relative;z-index:2;padding:0 8%}
+.hero h1{
+  font-size:96px;letter-spacing:12px;font-weight:900;
+  text-shadow:0 0 25px rgba(255,0,0,.45),0 0 70px rgba(255,0,0,.35)
+}
+.hero p{margin-top:18px;color:var(--muted);font-size:18px}
+.btn{
+  margin-top:40px;display:inline-block;padding:18px 44px;
+  background:linear-gradient(135deg,var(--red),var(--red2));
+  color:#fff;text-decoration:none;font-weight:800;border-radius:10px;
+  box-shadow:0 16px 45px rgba(255,0,0,.45);
+  transition:.25s
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 26px 70px rgba(255,0,0,.7)}
+
+/* ===== SECTIONS ===== */
+section{padding:110px 8%}
+h2{font-size:42px;margin-bottom:50px}
+
+/* ===== GRID / CARDS ===== */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px}
+.card{
+  background:linear-gradient(180deg,#0f0f16,#07070b);
+  border:1px solid rgba(255,0,0,.18);
+  padding:42px;border-radius:18px;position:relative;
+  opacity:0;transform:translateY(40px);
+  transition:transform .4s ease,opacity .4s ease,box-shadow .4s ease
+}
+.card::before{
+  content:"";position:absolute;inset:0;border-radius:18px;
+  background:linear-gradient(120deg,transparent,rgba(255,0,0,.18),transparent);
+  opacity:0;transition:.3s
+}
+.card.show{opacity:1;transform:none}
+.card:hover{box-shadow:0 34px 80px rgba(0,0,0,.7)}
+.card:hover::before{opacity:1}
+.card h3{font-size:22px;margin-bottom:14px}
+.card p{color:var(--muted)}
+
+/* ===== FORM ===== */
+.form-box{
+  max-width:520px;margin:0 auto;
+  background:linear-gradient(180deg,#0f0f16,#07070b);
+  padding:44px;border-radius:18px;border:1px solid rgba(255,0,0,.25)
+}
+form input,form textarea{
+  width:100%;padding:16px;margin-bottom:18px;
+  background:#020203;border:1px solid #2a2a32;color:#fff;border-radius:8px
+}
+form button{
+  width:100%;padding:18px;
+  background:linear-gradient(135deg,var(--red),var(--red2));
+  border:none;color:#fff;font-size:16px;font-weight:800;border-radius:10px;cursor:pointer
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+/* ===== CONTACTS ===== */
+.contacts a{color:var(--red2);text-decoration:none}
+
+/* ===== FLOAT TG ===== */
+.tg-float{
+  position:fixed;right:22px;bottom:22px;width:64px;height:64px;
+  background:#0088cc;color:#fff;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;box-shadow:0 0 40px rgba(0,136,204,.7);z-index:9999
 }
 
-body {
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-}
-
-.container {
-    width: 90%;
-    max-width: 1150px;
-    margin: 0 auto;
-}
-
-/* HERO */
-header {
-    background: radial-gradient(circle at top, #1a1a1f, #050506);
-    padding: 110px 0;
-    text-align: center;
-}
-
-header h1 {
-    font-size: 52px;
-    letter-spacing: 4px;
-    margin-bottom: 20px;
-}
-
-header p {
-    font-size: 18px;
-    color: var(--muted);
-    margin-bottom: 40px;
-}
-
-.btn {
-    display: inline-block;
-    padding: 16px 38px;
-    background: var(--red);
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    border-radius: 6px;
-    transition: 0.2s;
-}
-
-.btn:hover {
-    background: #e0001c;
-}
-
-/* SECTIONS */
-section {
-    padding: 85px 0;
-}
-
-h2 {
-    font-size: 34px;
-    margin-bottom: 30px;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 28px;
-}
-
-.card {
-    background: #0f0f13;
-    border: 1px solid #1f1f25;
-    padding: 30px;
-    border-radius: 8px;
-}
-
-.card h3 {
-    margin-bottom: 12px;
-    font-size: 20px;
-}
-
-.card p {
-    color: var(--muted);
-}
-
-/* FORM */
-.form-box {
-    background: #0f0f13;
-    border: 1px solid #1f1f25;
-    padding: 35px;
-    border-radius: 10px;
-    max-width: 520px;
-}
-
-form input, form textarea {
-    width: 100%;
-    padding: 14px;
-    margin-bottom: 15px;
-    background: #050506;
-    border: 1px solid #26262d;
-    color: #fff;
-    border-radius: 5px;
-}
-
-form textarea {
-    resize: none;
-    height: 100px;
-}
-
-form button {
-    width: 100%;
-    padding: 15px;
-    background: var(--red);
-    border: none;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-/* TG BUTTON */
-.tg-btn {
-    display: inline-block;
-    margin-top: 20px;
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.tg-btn span {
-    color: var(--red);
-}
-
-/* FOOTER */
-footer {
-    background: var(--bg-dark);
-    text-align: center;
-    padding: 25px 0;
-    color: #777;
-    font-size: 14px;
-}
-
-@media (max-width: 600px) {
-    header h1 { font-size: 36px; }
-}
+/* ===== FOOTER ===== */
+footer{text-align:center;padding:34px;color:#666}
 </style>
 </head>
+
 <body>
 
-<header>
-    <div class="container">
-        <h1>AMA</h1>
-        <p>Премиальный подбор и доставка автомобилей<br>из Южной Кореи, Японии и Китая</p>
-        <a href="#form" class="btn">Оставить заявку</a>
-    </div>
-</header>
+<!-- HERO -->
+<div class="hero">
+  <video src="bg.mp4" autoplay muted loop playsinline></video>
+  <div class="inner">
+    <h1>AMA</h1>
+    <p>Подбор, выкуп и доставка автомобилей под ключ<br>Южная Корея · Япония · Китай</p>
+    <a href="#form" class="btn">Оставить заявку</a>
+  </div>
+</div>
 
+<!-- SERVICES -->
 <section>
-    <div class="container">
-        <h2>О компании</h2>
-        <p>
-            <strong>AMA</strong> — команда, работающая напрямую с рынками Южной Кореи, Японии и Китая.
-            Мы находимся на месте, лично осматриваем автомобили и сопровождаем сделку от подбора до передачи клиенту.
-        </p>
+  <h2>Чем мы занимаемся</h2>
+  <div class="grid">
+    <div class="card reveal">
+      <h3>Аукционы и рынок</h3>
+      <p>Прямой доступ к аукционам и дилерам</p>
     </div>
+    <div class="card reveal">
+      <h3>Проверка</h3>
+      <p>Фото, видео, диагностика, история</p>
+    </div>
+    <div class="card reveal">
+      <h3>Доставка под ключ</h3>
+      <p>Логистика, таможня, РФ</p>
+    </div>
+  </div>
 </section>
 
-<section>
-    <div class="container">
-        <h2>Услуги</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Подбор авто</h3>
-                <p>По бюджету, задачам и комплектации</p>
-            </div>
-            <div class="card">
-                <h3>Осмотр и проверка</h3>
-                <p>Видео, фото, диагностика</p>
-            </div>
-            <div class="card">
-                <h3>Выкуп и доставка</h3>
-                <p>Логистика и растаможка под ключ</p>
-            </div>
-        </div>
-    </div>
-</section>
-
+<!-- FORM -->
 <section id="form">
-    <div class="container">
-        <h2>Заявка</h2>
-        <div class="form-box">
-            <form id="tgForm">
-                <input type="text" name="name" placeholder="Ваше имя" required>
-                <input type="tel" name="phone" placeholder="Телефон / WhatsApp" required>
-                <textarea name="message" placeholder="Какой автомобиль интересует"></textarea>
-                <button type="submit">Отправить заявку</button>
-            </form>
-
-            <a class="tg-btn" href="https://t.me/USERNAME" target="_blank">
-                Или напишите напрямую в <span>Telegram</span>
-            </a>
-        </div>
-    </div>
+  <h2>Заявка</h2>
+  <div class="form-box reveal">
+    <form id="tgForm">
+      <input type="text" name="name" placeholder="Ваше имя" required>
+      <input type="tel" name="phone" placeholder="Телефон / WhatsApp" required>
+      <textarea name="message" placeholder="Какой автомобиль интересует"></textarea>
+      <button type="submit">Отправить заявку</button>
+    </form>
+  </div>
 </section>
 
-<footer>
-    © AMA, 2026 · Авто из Кореи · Японии · Китая
-</footer>
+<!-- CONTACTS -->
+<section class="contacts">
+  <h2>Контакты</h2>
+  <p><strong>Павел — Россия</strong><br><a href="tel:+79237452009">+7 923 745-20-09</a></p><br>
+  <p><strong>Александр — Корея</strong><br><a href="tel:+821058356253">+82 10 5835 6253</a></p><br>
+  <p><a href="https://t.me/auto_moto_auction" target="_blank">Telegram-канал</a></p><br>
+  <p><a href="https://vk.com/auto_moto_auction" target="_blank">VK-группа</a></p>
+</section>
+
+<footer>© AMA Auto Moto Auction</footer>
+
+<a href="https://t.me/auto_moto_auction" class="tg-float" target="_blank">✈</a>
 
 <script>
+// ===== TELEGRAM BOT =====
 document.getElementById("tgForm").addEventListener("submit", function(e){
-    e.preventDefault();
-
-    const TOKEN = "8215640889:AAHjYWXgWQLn5LIkVNlgDY3SvxT0n9cAxqI";
-    const CHAT_ID = "301069436";
-
-    const name = this.name.value;
-    const phone = this.phone.value;
-    const msg = this.message.value;
-
-    const text = `
-Заявка AMA
-Имя: ${name}
-Телефон: ${phone}
-Запрос: ${msg}
-    `;
-
-    fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-            chat_id: CHAT_ID,
-            text: text
-        })
-    }).then(() => {
-        alert("Заявка отправлена. Мы свяжемся с вами.");
-        this.reset();
-    });
+  e.preventDefault();
+  const TOKEN="8215640889:AAHjYWXgWQLn5LIkVNlgDY3SvxT0n9cAxqI";
+  const CHAT_ID="301069436";
+  fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      chat_id:CHAT_ID,
+      text:`Заявка AMA\nИмя: ${this.name.value}\nТелефон: ${this.phone.value}\nЗапрос: ${this.message.value}`
+    })
+  }).then(()=>{alert("Заявка отправлена");this.reset();});
 });
+
+// ===== REVEAL ANIMATION =====
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("show"); } });
+},{threshold:.15});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 </script>
-<!-- Telegram Floating Button -->
-<a href="https://t.me/vlexts1"
-   class="tg-float"
-   target="_blank"
-   aria-label="Написать в Telegram">
-    ✈
-</a>
-
-<style>
-.tg-float {
-    position: fixed;
-    right: 22px;
-    bottom: 22px;
-    width: 60px;
-    height: 60px;
-    background: #0088cc;
-    color: #fff;
-    border-radius: 50%;
-    font-size: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.35);
-    z-index: 9999;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.tg-float:hover {
-    transform: scale(1.08);
-    box-shadow: 0 12px 35px rgba(0,0,0,0.45);
-}
-</style>
 
 </body>
 </html>
