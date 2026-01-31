@@ -64,23 +64,17 @@ body{
     z-index:2;
 }
 
-/* LOGO */
-.hero .logo{
-    max-width:260px;
-    margin:0 auto 20px;
-}
-.hero .logo img{width:100%}
-
-/* BRAND TEXT */
-.hero .brand-text{
-    font-size:clamp(26px,6vw,44px);
-    letter-spacing:8px;
-    margin-bottom:18px;
+/* ===== MAIN BRAND TEXT ===== */
+.brand-main{
+    font-size:clamp(48px, 11vw, 140px);
+    letter-spacing:14px;
     text-transform:uppercase;
-    color:#fff;
+    margin-bottom:28px;
+    color:#ffffff;
     text-shadow:
-        0 0 20px rgba(255,0,0,.55),
-        0 0 55px rgba(255,0,0,.45);
+        0 0 25px rgba(255,0,0,.55),
+        0 0 70px rgba(255,0,0,.45),
+        0 0 140px rgba(255,0,0,.25);
 }
 
 .hero p{
@@ -88,7 +82,7 @@ body{
     font-size:18px;
 }
 
-/* BUTTON */
+/* ===== BUTTON ===== */
 .btn{
     margin-top:42px;
     display:inline-block;
@@ -202,8 +196,10 @@ footer{
 /* ===== MOBILE ===== */
 @media (max-width:768px){
     section{padding:70px 6%}
-    .hero .logo{max-width:200px}
-    .hero .brand-text{letter-spacing:5px}
+    .brand-main{
+        letter-spacing:6px;
+        line-height:1.1;
+    }
     .hero p{font-size:16px}
     .btn{padding:16px 40px}
 }
@@ -215,17 +211,11 @@ footer{
 <!-- HERO -->
 <div class="hero">
     <div class="inner">
-        <div class="logo">
-            <img src="logo.png" alt="AMA Auto Moto Auction">
-        </div>
-
-        <div class="brand-text">AUTO MOTO AUCTION</div>
-
+        <h1 class="brand-main">AUTO MOTO AUCTION</h1>
         <p>
             Подбор, выкуп и доставка автомобилей под ключ<br>
             Южная Корея · Япония · Китай
         </p>
-
         <a href="#form" class="btn">Оставить заявку</a>
     </div>
 </div>
@@ -294,4 +284,3 @@ document.getElementById("tgForm").addEventListener("submit",function(e){
 
 </body>
 </html>
-
