@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
 <title>AMA — Auto Moto Auction</title>
 
 <style>
@@ -11,7 +10,7 @@
 @font-face {
     font-family: "Soyuz Grotesk";
     src:
-        url("SoyuzGroteskBold.otf") format("opentype"),
+        url("Soyuz_Grotesk_Bold.otf") format("opentype"),
         url("SoyuzGroteskBold.ttf") format("truetype");
     font-weight: 700;
     font-style: normal;
@@ -23,17 +22,12 @@
     --red:#b00014;
     --red2:#ff1e2d;
     --black:#020203;
-    --dark:#0b0b10;
     --text:#f2f2f2;
     --muted:#9a9a9a;
 }
 
 /* ===== RESET ===== */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
     font-family:"Soyuz Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
@@ -53,8 +47,9 @@ body{
     text-align:center;
     padding:0 8%;
     background:
-        linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.9)),
+        linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.65)),
         url("hero-bg.jpg") center/cover no-repeat;
+    filter:contrast(1.15) saturate(1.25) brightness(1.05);
 }
 
 .hero::after{
@@ -62,8 +57,8 @@ body{
     position:absolute;
     inset:0;
     background:
-        radial-gradient(circle at 20% 15%, rgba(255,0,0,.25), transparent 45%),
-        radial-gradient(circle at 80% 30%, rgba(255,0,0,.15), transparent 45%);
+        radial-gradient(circle at 20% 20%, rgba(255,0,0,.35), transparent 45%),
+        radial-gradient(circle at 80% 30%, rgba(255,0,0,.25), transparent 45%);
 }
 
 .hero .inner{
@@ -71,22 +66,34 @@ body{
     z-index:2;
 }
 
-.hero h1{
-    font-size:clamp(64px, 14vw, 130px);
-    letter-spacing:14px;
+/* LOGO */
+.hero .logo{
+    max-width:260px;
+    margin:0 auto 20px;
+}
+
+.hero .logo img{
+    width:100%;
+}
+
+/* AUTO MOTO AUCTION TEXT */
+.hero .brand-text{
+    font-size:clamp(28px,6vw,44px);
+    letter-spacing:8px;
+    margin-bottom:18px;
     text-transform:uppercase;
+    color:#fff;
     text-shadow:
-        0 0 30px rgba(255,0,0,.45),
-        0 0 80px rgba(255,0,0,.35);
+        0 0 20px rgba(255,0,0,.55),
+        0 0 50px rgba(255,0,0,.45);
 }
 
 .hero p{
-    margin-top:20px;
-    font-size:18px;
     color:var(--muted);
+    font-size:18px;
 }
 
-/* ===== BUTTON ===== */
+/* BUTTON */
 .btn{
     margin-top:42px;
     display:inline-block;
@@ -106,12 +113,10 @@ body{
 }
 
 /* ===== SECTIONS ===== */
-section{
-    padding:100px 8%;
-}
+section{padding:100px 8%}
 
 h2{
-    font-size:clamp(28px, 6vw, 44px);
+    font-size:clamp(28px,6vw,44px);
     margin-bottom:50px;
 }
 
@@ -135,7 +140,7 @@ h2{
     box-shadow:0 35px 90px rgba(0,0,0,.75);
 }
 
-.card p{color:var(--muted);}
+.card p{color:var(--muted)}
 
 /* ===== FORM ===== */
 .form-box{
@@ -158,7 +163,7 @@ form input,form textarea{
     font-size:15px;
 }
 
-form textarea{resize:none;height:100px;}
+form textarea{resize:none;height:100px}
 
 form button{
     width:100%;
@@ -205,10 +210,11 @@ footer{
 
 /* ===== MOBILE ===== */
 @media (max-width:768px){
-    section{padding:70px 6%;}
-    .hero p{font-size:16px;}
-    .btn{padding:16px 40px;}
-    .card{padding:32px;}
+    section{padding:70px 6%}
+    .hero .logo{max-width:200px}
+    .hero .brand-text{letter-spacing:5px}
+    .hero p{font-size:16px}
+    .btn{padding:16px 40px}
 }
 </style>
 </head>
@@ -218,11 +224,17 @@ footer{
 <!-- HERO -->
 <div class="hero">
     <div class="inner">
-        <h1>AMA</h1>
+        <div class="logo">
+            <img src="logo.png" alt="AMA Auto Moto Auction">
+        </div>
+
+        <div class="brand-text">AUTO MOTO AUCTION</div>
+
         <p>
             Подбор, выкуп и доставка автомобилей под ключ<br>
             Южная Корея · Япония · Китай
         </p>
+
         <a href="#form" class="btn">Оставить заявку</a>
     </div>
 </div>
@@ -291,5 +303,3 @@ document.getElementById("tgForm").addEventListener("submit",function(e){
 
 </body>
 </html>
-
-
