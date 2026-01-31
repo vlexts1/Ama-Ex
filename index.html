@@ -9,9 +9,7 @@
 /* ===== FONT ===== */
 @font-face {
     font-family: "Soyuz Grotesk";
-    src:
-        url("Soyuz_Grotesk_Bold.otf") format("opentype"),
-        url("SoyuzGroteskBold.ttf") format("truetype");
+    src: url("Soyuz_Grotesk_Bold.otf") format("opentype");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
@@ -71,21 +69,18 @@ body{
     max-width:260px;
     margin:0 auto 20px;
 }
+.hero .logo img{width:100%}
 
-.hero .logo img{
-    width:100%;
-}
-
-/* AUTO MOTO AUCTION TEXT */
+/* BRAND TEXT */
 .hero .brand-text{
-    font-size:clamp(28px,6vw,44px);
+    font-size:clamp(26px,6vw,44px);
     letter-spacing:8px;
     margin-bottom:18px;
     text-transform:uppercase;
     color:#fff;
     text-shadow:
         0 0 20px rgba(255,0,0,.55),
-        0 0 50px rgba(255,0,0,.45);
+        0 0 55px rgba(255,0,0,.45);
 }
 
 .hero p{
@@ -106,7 +101,6 @@ body{
     box-shadow:0 20px 60px rgba(255,0,0,.45);
     transition:.25s;
 }
-
 .btn:hover{
     transform:translateY(-3px);
     box-shadow:0 30px 90px rgba(255,0,0,.75);
@@ -134,12 +128,10 @@ h2{
     border-radius:20px;
     transition:.35s;
 }
-
 .card:hover{
     transform:translateY(-6px);
     box-shadow:0 35px 90px rgba(0,0,0,.75);
 }
-
 .card p{color:var(--muted)}
 
 /* ===== FORM ===== */
@@ -162,7 +154,6 @@ form input,form textarea{
     border-radius:10px;
     font-size:15px;
 }
-
 form textarea{resize:none;height:100px}
 
 form button{
@@ -303,3 +294,4 @@ document.getElementById("tgForm").addEventListener("submit",function(e){
 
 </body>
 </html>
+
